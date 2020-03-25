@@ -70,8 +70,7 @@
                     console.log("登录成功")
                     window.location.href='${pageContext.request.contextPath}/meteor/list'
                 }else {
-                    console.log("用户名或密码错误")
-                    $('#killPhoneMessage').hide().html('<label class="label label-danger">手机号错误!</label>').show(300);
+                    alert("用户名或密码错误")
                 }
             }
         });

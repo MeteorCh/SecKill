@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.meteor.SecondKill.Dao.SecKillDao">
+    <select id="listSecKill" resultType="SecKill">
+        SELECT *
+        FROM seckill
+        WHERE number >0
+        ORDER BY create_time DESC
+    </select>
+    <select id="getSecKillByID" resultType="SecKill">
+        SELECT *
+        FROM seckill
+        WHERE seckill_id=#{secID}
+    </select>
+    <select id="queryUser" resultType="User">
+        select * from user;
+    </select>
+    <update id="reduceNumber">
+        UPDATE seckill
+        SET number = number-1
+        WHERE seckill_id=#{secKillID}
+        AND start_time <![CDATA[ <= ]]> #{date}
+        AND end_time >= #{date}
+        AND number > 0;
+    </update>
+</mapper>

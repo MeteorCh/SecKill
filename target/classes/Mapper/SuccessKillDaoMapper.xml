@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.meteor.SecondKill.Dao.SuccessKilledDao">
+    <insert id="insertSuccessKilled">
+        INSERT ignore INTO success_killed(seckill_id,user_name,state)
+        VALUES (#{secKillId},#{userKey},0)
+    </insert>
+    <select id="queryByIdWithSecKill" resultType="SuccessKilled">
+        SELECT
+            sk.seckill_id,
+            sk.user_name,
+            sk.create_time,
+            sk.state,
+            s.seckill_id "seckill.seckill_id",
+            s.name "seckill.name",
+            s.number "seckill.number",
+            s.start_time "seckill.start_time",
+            s.end_time "seckill.end_time",
+            s.create_time "seckill.create_time"
+        FROM success_killed sk
+        INNER JOIN seckill s ON sk.seckill_id=s.seckill_id
+        WHERE sk.seckill_id=#{secKillId} and sk.user_name=#{userKey}
+    </select>
+</mapper>
